@@ -1,9 +1,15 @@
-import { Container, Navbar, Nav, Button, Row, Col, Card, Image } from 'react-bootstrap';
+import {Container, Navbar, Nav, Button, Row, Col, Card, Image} from 'react-bootstrap';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCoffee} from '@fortawesome/free-solid-svg-icons';
+
+import bgImage from '../assets/Woman cashier at checkout in shop or supermarket.jpg';
+import navbarIcon from '../assets/1892627.png';
+
 
 export const DashboardForm = () => {
     const styles = {
         backgroundColor: '#e3f2fd',
-        fontSize: '48px'
+        // fontSize: '48px'
     };
 
     const btnDashboard = {
@@ -17,10 +23,11 @@ export const DashboardForm = () => {
                     <Navbar expand="lg" fixed="top" style={styles}>
                         <Container fluid>
                             <Navbar.Brand href="#">
-                                <Image src="" alt="Logo" width="30" height="30" className="d-inline-block align-text-top" />{' '}
+                                <Image src={navbarIcon} alt="Logo" width="30" height="30"
+                                       className="d-inline-block align-text-top"/>{' '}
                                 Dazzler's POS System
                             </Navbar.Brand>
-                            <Navbar.Toggle aria-controls="navbarSupportedContent" />
+                            <Navbar.Toggle aria-controls="navbarSupportedContent"/>
                             <Navbar.Collapse id="navbarSupportedContent">
                                 <Nav className="me-auto mb-2 mb-lg-0">
                                     <Nav.Item>
@@ -51,7 +58,7 @@ export const DashboardForm = () => {
                     <h1 className="fw-bold fs-2 col-12 mb-5">Welcome to Dazzler's POS System</h1>
 
                     <Image
-                        src="assets/Woman%20cashier%20at%20checkout%20in%20shop%20or%20supermarket.jpg"
+                        src={bgImage}
                         fluid
                         className="col-12"
                         alt="bg_image"
@@ -60,43 +67,30 @@ export const DashboardForm = () => {
 
                 <Row className="col-md-6 col-sm-12 row gap-4 mt-5 mb-5 justify-content-center text-center">
                     <Col id="btn_Customer" className="col-4 shadow bg-body rounded-5 h-50">
-                        <i className="fas fa-user-friends mt-5" style={btnDashboard}></i>
+                        <FontAwesomeIcon icon={faCoffee} size="5x"/>
                         <h3 className="display-6 fs-3 mt-3">Customer</h3>
                     </Col>
 
                     <Col id="btn_Item" className="col-4 shadow bg-body rounded-5 h-50">
-                        <i className="fa-solid fa-cubes mt-5" style={btnDashboard}></i>
+                        <FontAwesomeIcon icon={faCoffee} size="5x"/>
                         <h3 className="display-6 fs-3 mt-3">Item</h3>
                     </Col>
 
                     <Col id="btn_Place_Order" className="col-4 shadow bg-body rounded-5 h-50">
-                        <i className="fa-solid fa-cart-shopping mt-5" style={btnDashboard}></i>
+                        <FontAwesomeIcon icon={faCoffee} size="5x"/>
                         <h3 className="display-6 fs-3 mt-3">Place Order</h3>
                     </Col>
 
                     <Col id="btn_Manage_Orders" className="col-4 shadow bg-body rounded-5 h-50">
-                        <i className="fa-solid fa-file-invoice mt-5" style={btnDashboard}></i>
+                        <FontAwesomeIcon icon={faCoffee} size="5x"/>
                         <h3 className="display-6 fs-3 mt-3">Manage Orders</h3>
                     </Col>
                 </Row>
-
                 <small className="col-12 fw-light fs-6 text-end mt-3 pe-4">
                     Designed & Developed By Dasindu Hewagamage
                 </small>
             </Container>
-
-
-            <Navbar bg="dark" data-bs-theme="dark">
-                <Container>
-                    <Navbar.Brand href="#home">Dazzler's POS System</Navbar.Brand>
-                    <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
-                    </Nav>
-                </Container>
-            </Navbar>
-            </>
+        </>
     )
 }
 
