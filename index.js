@@ -1,23 +1,27 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const url = 'mongodb://localhost/GDSE';
 
 const app = express();
 const port = process.env.PORT || 3000;
-// app.use(express.json());
 
-//connecting to mongodb
-mongoose.connect('mongodb://localhost:27017/GDSE')
-    .then(() => {
-        app.listen(port, () => {
-            console.log(`API is running on Port ${port}`);
-        })
-    })
-    .catch((reason) => {
-        console.error(reason);
-    })
-
-
-app.get('/', (req, res) => {  //get request
-    console.log("Get request scope called.");
-    res.status(200).send(`<h1>Hello Express!</h1>`);
+mongoose.connect(url, {useNewUrlParser:true});
+    // .then(() => {
+    //     console.log("API is running on Port : Hello Java")
+    // })
+    // .catch((reason) => {
+    //     console.error(reason);
+    // })
+const conn = mongoose.connection;
+conn.on('open', function () {
+    console.log("!== Connected ==!")
 })
+
+app.listen(port, () => {
+    console.log(`API is running on Port ${port}`);
+})
+
+// app.get('/',(req,res) => {
+//     res.send("Hi");
+// })
+
