@@ -1,29 +1,27 @@
 const express = require('express');
+
+const {
+    getOrderById,
+    getAllOrders,
+    saveOrder,
+    updateOrder,
+    deleteOrder} = require('../controller/OrderController')
+
 const router = express.Router();
 
-//return all orders
-router.get('/all', (req, res)=> {
-    res.json({mssg:'Get Request for All orders in Order API'});
-});
+//get all orders
+router.get('/all', getAllOrders);
 
 //get order by id
-router.get('/:id', (req, res)=> {
-    res.json({mssg:'Get Request for a specific order in Order API'});
-});
+router.get('/:id', getOrderById);
 
 //save new order
-router.post('/', (req, res)=> {
-    res.json({mssg:'Post Request to save a new order in Order API'});
-});
+router.post('/', saveOrder);
 
 //delete order by id
-router.delete('/:id', (req, res)=> {
-    res.json({mssg:'Delete Request to delete order by id in Order API'});
-});
+router.delete('/:id', deleteOrder);
 
 //update order by id
-router.patch('/:id', (req, res)=> {
-    res.json({mssg:'Delete Request to delete order by id in Order API'});
-});
+router.patch('/:id', updateOrder);
 
 module.exports = router;
