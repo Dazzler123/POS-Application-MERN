@@ -1,29 +1,26 @@
 const express = require('express');
+
+const {getItemById,
+    getAllItems,
+    saveItem,
+    updateItem,
+    deleteItem} = require('../controller/ItemController')
+
 const router = express.Router();
 
-//return all items
-router.get('/all', (req, res)=> {
-    res.json({mssg:'Get Request for All Items in Item API'});
-});
+//get all items
+router.get('/all', getAllItems);
 
 //get item by id
-router.get('/:id', (req, res)=> {
-    res.json({mssg:'Get Request for a specific item in Item API'});
-});
+router.get('/:id', getItemById);
 
 //save new item
-router.post('/', (req, res)=> {
-    res.json({mssg:'Post Request to save a new item in Item API'});
-});
+router.post('/', saveItem);
 
 //delete item by id
-router.delete('/:id', (req, res)=> {
-    res.json({mssg:'Delete Request to delete item by id in Item API'});
-});
+router.delete('/:id', deleteItem);
 
 //update item by id
-router.patch('/:id', (req, res)=> {
-    res.json({mssg:'Delete Request to delete item by id in Item API'});
-});
+router.patch('/:id', updateItem);
 
 module.exports = router;
