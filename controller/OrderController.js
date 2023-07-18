@@ -29,10 +29,10 @@ const getOrderById = async (req, res) => {
 
 
 const saveOrder = async (req, res) => {
-    const {o_id, date, customer_id, tot_discount_issued} = req.body;
+    const {o_id, date, customer_id, items, tot_discount_issued} = req.body;
     try {
         const order = await Order.create({
-            o_id, date, customer_id, tot_discount_issued});
+            o_id, date, customer_id, items, tot_discount_issued});
         res.status(200).json(order);
     } catch (error) {
         res.status(400).json({error: error.message});

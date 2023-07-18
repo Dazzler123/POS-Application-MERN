@@ -8,10 +8,10 @@ const port = process.env.PORT || 3000;
 //connection to mongodb
 mongoose.connect(mongoURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
-        console.log('!=== Connected to MongoDB ===!');
+        console.log('!===== Connected to MongoDB =====!');
     })
     .catch((err) => {
-        console.error('Error connecting to MongoDB:', err);
+        console.error('Error connecting to MongoDB :', err);
     });
 
 //middleware
@@ -25,7 +25,6 @@ app.use((req, res, next) => {
 app.use('/api/v1/customer', require('./routes/CustomerRoutesController'));
 app.use('/api/v1/item', require('./routes/ItemRoutesController'));
 app.use('/api/v1/order', require('./routes/OrderRoutesController'));
-app.use('/api/v1/order-detail', require('./routes/OrderDetailsRoutesController'));
 
 app.get('/', (req, res) => {
     res.send("Welcome to Dazzler's POS System - Server");
