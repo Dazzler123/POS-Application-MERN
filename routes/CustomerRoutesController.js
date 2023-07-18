@@ -1,4 +1,5 @@
 const express = require('express');
+const Customer = require('../model/Customer');
 
 const router = express.Router();
 
@@ -13,8 +14,15 @@ router.get('/:id', (req, res) => {
 });
 
 //save new customer
-router.post('/', (req, res) => {
-    res.json({mssg: 'Post Request to save a new customer in Customer API'});
+router.post('/', async (req, res) => {
+    const {id, name, address, contact} = req.body;
+    try {
+        const customer = await Customer.create({id,name,address,contact});
+        res.status(200).json(customer);
+    } catch (error) {
+        res.status(400).json({error:error.message});
+    }
+    // res.json({mssg: 'Post Request to save a new customer in Customer API'});
 });
 
 //delete customer by id

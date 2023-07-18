@@ -1,4 +1,4 @@
-const student = require('../model/Student');
+const student = require('../model/Customer');
 const {response} = require('express');
 
 const req = require('express/lib/request');
