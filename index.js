@@ -12,13 +12,12 @@ app.use((req,res,next) => {
 });
 
 //routes
-app.use('api/v1/customer', require('./routes/CustomerRoutesController'));
-app.use('api/v1/item', require('./routes/ItemRoutesController'));
-app.use('api/v1/order', require('./routes/OrderRoutesController'));
+app.use('/api/v1/customer', require('./routes/CustomerRoutesController'));
+app.use('/api/v1/item', require('./routes/ItemRoutesController'));
+app.use('/api/v1/order', require('./routes/OrderRoutesController'));
 
 app.get('/', (req, res) => {
-    res.json({mssg: "Welcome to the App"})
-    console.log("Welcome to Dazzler's POS System - Server");
+    res.json({mssg: "Welcome to Dazzler's POS System - Server"})
 })
 
 app.listen(port , () => {
