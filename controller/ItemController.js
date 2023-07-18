@@ -75,7 +75,7 @@ const deleteItem = async (req, res) => {
     if (!item) {
         return res.status(404).json({error: "No such item found!"});
     }
-    res.status(200).json(item);
+    res.status(200).json(true);
 }
 
 module.exports = {
