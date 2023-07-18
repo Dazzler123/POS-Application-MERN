@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/customer', require('./routes/CustomerRoutesController'));
 app.use('/api/v1/item', require('./routes/ItemRoutesController'));
 app.use('/api/v1/order', require('./routes/OrderRoutesController'));
+app.use('/api/v1/order-detail', require('./routes/OrderDetailsRoutesController'));
 
 app.get('/', (req, res) => {
     res.send("Welcome to Dazzler's POS System - Server");
