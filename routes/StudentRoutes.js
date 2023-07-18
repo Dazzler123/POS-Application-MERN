@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-//code here
-
+router.get('/', ()=> {
+    console.log("Get Request in StudentRoutes")
+});
 
 module.exports = router;
