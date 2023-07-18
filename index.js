@@ -5,6 +5,7 @@ const mongoURI = 'mongodb://127.0.0.1:27017/POS';
 const app = express();
 const port = process.env.PORT || 3000;
 
+//connection to mongodb
 mongoose.connect(mongoURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log('!=== Connected to MongoDB ===!');
@@ -20,13 +21,13 @@ app.use((req, res, next) => {
     next();
 });
 
-//routes
+//routes to APIs
 app.use('/api/v1/customer', require('./routes/CustomerRoutesController'));
 app.use('/api/v1/item', require('./routes/ItemRoutesController'));
 app.use('/api/v1/order', require('./routes/OrderRoutesController'));
 
 app.get('/', (req, res) => {
-    res.json({mssg: "Welcome to Dazzler's POS System - Server"})
+    res.send("Welcome to Dazzler's POS System - Server");
 })
 
 app.listen(port, () => {
