@@ -30,7 +30,7 @@ const ItemForm = () => {
                         <h6 className="fst-italic fw-normal col-4 ms-3" style={{ paddingTop: '16px' }}>
                             Search By
                         </h6>
-                        <Form.Select className="form-select form-select-sm col-8 ms-3 w-50" s
+                        <Form.Select className="form-select form-select-sm col-8 ms-3 w-50 mb-4" s
                                      tyle={{ marginBottom: '18px' }} aria-label=".form-select-sm example">
                             <option selected>Item Code</option>
                             <option value="1">Item Name</option>
@@ -47,38 +47,6 @@ const ItemForm = () => {
                         View All Items
                     </Button>
                 </div>
-
-
-                {/*/!* Delete item modal *!/*/}
-                {/*<Modal show={false} onHide={() => {}} id="staticBackdrop6" backdrop="static" keyboard={false} tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">*/}
-                {/*    <Modal.Dialog className="modal-dialog-top">*/}
-                {/*        <Modal.Content>*/}
-                {/*            <Modal.Header className="bg-danger">*/}
-                {/*                <Modal.Title id="staticBackdropLabel6">Delete Item</Modal.Title>*/}
-                {/*                <Button variant="secondary" onClick={() => {}}></Button>*/}
-                {/*            </Modal.Header>*/}
-                {/*            <Modal.Body>*/}
-                {/*                <Form.Group className="mb-3">*/}
-                {/*                    <Form.Label>Are you sure you want to delete this item?</Form.Label>*/}
-                {/*                    <br />*/}
-                {/*                    <Form.Label className="fw-semibold">Code:</Form.Label>*/}
-                {/*                    <Form.Label id="lbl_Item_Code" className="fw-semibold"></Form.Label>*/}
-                {/*                    <br />*/}
-                {/*                    <Form.Label className="fw-semibold">Name:</Form.Label>*/}
-                {/*                    <Form.Label id="lbl_Item_Name" className="fw-semibold"></Form.Label>*/}
-                {/*                </Form.Group>*/}
-                {/*            </Modal.Body>*/}
-                {/*            <Modal.Footer>*/}
-                {/*                <Button variant="secondary" onClick={() => {}}>*/}
-                {/*                    No*/}
-                {/*                </Button>*/}
-                {/*                <Button id="btn_Delete_Item_Details" variant="danger" onClick={() => {}}>*/}
-                {/*                    Yes*/}
-                {/*                </Button>*/}
-                {/*            </Modal.Footer>*/}
-                {/*        </Modal.Content>*/}
-                {/*    </Modal.Dialog>*/}
-                {/*</Modal>*/}
 
                 {/* Item details table */}
                 <div className="container mt-5 justify-content-center col-md-12 col-sm-12">
