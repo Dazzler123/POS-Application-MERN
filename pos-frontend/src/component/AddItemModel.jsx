@@ -20,7 +20,7 @@ const AddItemModel = () => {
 
             <Modal
                 id="staticBackdrop4"
-                // backdrop="static"
+                backdrop="static"
                 keyboard={false}
                 centered
                 show={showModal} // Set the value of "show"
