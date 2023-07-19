@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card, Form, Button, Modal, Table } from 'react-bootstrap';
 import NavbarHeader from "./NavbarHeader";
+import AddItemModel from "./AddItemModel";
 
 const ItemForm = () => {
     return (
@@ -35,9 +36,10 @@ const ItemForm = () => {
 
                 {/* CRUD buttons */}
                 <div className="container row col-md-6 gap-3 mt-3 mb-3 justify-content-center col-sm-12">
-                    <Button id="btn_Add_Item" type="button" variant="outline-success" className="col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
-                        + Add New Item
-                    </Button>
+                    {/*<Button id="btn_Add_Item" type="button" variant="outline-success" className="col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">*/}
+                    {/*    + Add New Item*/}
+                    {/*</Button>*/}
+                    <AddItemModel/>
                     <Button id="btn_Update_Item" type="button" variant="outline-warning" className="col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" disabled>
                         Update Item
                     </Button>
@@ -49,42 +51,73 @@ const ItemForm = () => {
                     </Button>
                 </div>
 
-                {/* Save item modal */}
-                <Modal show={false} onHide={() => {}} id="staticBackdrop4" backdrop="static" keyboard={false} tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <Modal
+                    id="staticBackdrop4"
+                    backdrop="static"
+                    keyboard={false}
+                    centered
+                    show={false} // Set the value of "show" based on your logic to show/hide the modal
+                >
                     <Modal.Header className="bg-success">
-                        <Modal.Title id="staticBackdropLabel4">+ Add New Item</Modal.Title>
-                        <Button variant="secondary" onClick={() => {}}></Button>
+                        <Modal.Title>+ Add New Item</Modal.Title>
+                        <Button variant="secondary" data-bs-dismiss="modal" aria-label="Close">
+                            Close
+                        </Button>
                     </Modal.Header>
                     <Modal.Body>
                         {/* Save item input form */}
                         <Form>
                             <Form.Group className="mb-3">
                                 <Form.Label>Item Code:</Form.Label>
-                                <Form.Control id="txt_Item_Code" type="text" placeholder="Ex: ITM-001" />
-                                <span className="control-error fw-light fs-6 text-danger" id="lbl_Add_Item_Reg_ID"></span>
+                                <Form.Control
+                                    id="txt_Item_Code"
+                                    type="text"
+                                    placeholder="Ex: ITM-001"
+                                />
+                                <Form.Text className="text-danger fw-light fs-6">
+                                    {/* Add the error message here using state or props */}
+                                </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Item Name:</Form.Label>
-                                <Form.Control id="txt_Item_Name" type="text" placeholder="Ex: Keerisamba 5kg" />
-                                <span className="control-error fw-light fs-6 text-danger" id="lbl_Add_Item_Reg_Name"></span>
+                                <Form.Control
+                                    id="txt_Item_Name"
+                                    type="text"
+                                    placeholder="Ex: Keerisamba 5kg"
+                                />
+                                <Form.Text className="text-danger fw-light fs-6">
+                                    {/* Add the error message here using state or props */}
+                                </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Price Per Unit:</Form.Label>
-                                <Form.Control id="txt_Price_Per_Unit" type="text" placeholder="Ex: 2500.00" />
-                                <span className="control-error fw-light fs-6 text-danger" id="lbl_Add_Item_Reg_PPU"></span>
+                                <Form.Control
+                                    id="txt_Price_Per_Unit"
+                                    type="text"
+                                    placeholder="Ex: 2500.00"
+                                />
+                                <Form.Text className="text-danger fw-light fs-6">
+                                    {/* Add the error message here using state or props */}
+                                </Form.Text>
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Quantity On Hand:</Form.Label>
-                                <Form.Control id="txt_QTY_On_Hand" type="text" placeholder="Ex: 500" />
-                                <span className="control-error fw-light fs-6 text-danger" id="lbl_Add_Item_Reg_QOH"></span>
+                                <Form.Control
+                                    id="txt_QTY_On_Hand"
+                                    type="text"
+                                    placeholder="Ex: 500"
+                                />
+                                <Form.Text className="text-danger fw-light fs-6">
+                                    {/* Add the error message here using state or props */}
+                                </Form.Text>
                             </Form.Group>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={() => {}}>
+                        <Button variant="secondary" data-bs-dismiss="modal">
                             Cancel
                         </Button>
-                        <Button id="btn_Add_New_Item" variant="primary" onClick={() => {}}>
+                        <Button id="btn_Add_New_Item" variant="primary">
                             Save Item
                         </Button>
                     </Modal.Footer>
