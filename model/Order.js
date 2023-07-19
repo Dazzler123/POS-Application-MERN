@@ -33,6 +33,7 @@ const orderSchema = new Schema({
         type: String,
         required: true
     },
+    //order details (nested schema)
     items: {
         type: [orderDetailsSchema],
         required: true
