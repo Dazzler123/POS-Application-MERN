@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, Form, Button, Modal, Table} from 'react-bootstrap';
-import {LoadAllCustomers} from "./controller/CustomerFormController";
-import NavbarHeader from "./NavbarHeader";
+import {LoadAllCustomers} from "../controller/CustomerFormController";
+import NavbarHeader from "../NavbarHeader";
 
 const CustomerForm = () => {
     return (

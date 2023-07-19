@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, Form, Button, Modal, Table } from 'react-bootstrap';
-import NavbarHeader from "./NavbarHeader";
+import NavbarHeader from "../NavbarHeader";
 import AddItemModel from "./AddItemModel";
 import UpdateItemModel from "./UpdateItemModal";
 import DeleteItemModel from "./DeleteItemModel";
