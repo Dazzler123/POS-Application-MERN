@@ -1,8 +1,13 @@
 import React, {useState} from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import {saveCustomer} from "../controller/CustomerFormController";
+import CustomerDTO from "../../dto/CustomerDTO";
+import $ from 'jquery';
 
 const AddNewCustomerModel = () => {
     const [showModal, setShowModal] = useState(false);
+
+    let customer = new CustomerDTO();
 
     const handleOpenModal = () => {
         setShowModal(true);
@@ -11,6 +16,20 @@ const AddNewCustomerModel = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+    function btnSaveCustomerOnClick() {
+        const newCustomer = new CustomerDTO(
+            $('#txt_Cus_ID').val(),
+            $('#txt_Cus_Name').val(),
+            $('#txt_Cus_Address').val(),
+            $('#txt_Cus_Contact').val()
+        );
+        // pass newCustomer object to saveCustomer to send to backend
+        saveCustomer(newCustomer);
+
+        // Close the modal after saving the customer
+        handleCloseModal();
+    }
 
     return (
         <>
@@ -85,7 +104,7 @@ const AddNewCustomerModel = () => {
                         <Button variant="secondary" onClick={handleCloseModal}>
                             Cancel
                         </Button>
-                        <Button id="btn_Add_New_Customer" variant="primary">
+                        <Button onClick={btnSaveCustomerOnClick} id="btn_Add_New_Customer" variant="primary">
                             Save Customer
                         </Button>
                     </Modal.Footer>

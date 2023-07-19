@@ -1,12 +1,21 @@
-import React from 'react';
-import {Card, Form, Button, Modal, Table} from 'react-bootstrap';
-import {LoadAllCustomers} from "../controller/CustomerFormController";
+import {Card, Form, Button, Table} from 'react-bootstrap';
 import NavbarHeader from "../NavbarHeader";
+import {loadAllCustomers} from "../controller/CustomerFormController";
 import AddNewCustomerModel from "./AddNewCustomerModel";
 import UpdateCustomerModel from "./UpdateCustomerModel";
 import DeleteCustomerModel from "./DeleteCustomerModel";
+import React, {useState} from "react";
 
-const CustomerForm = () => {
+export const CustomerForm = () => {
+    const [tableData, setTableData] = useState([]);
+    const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+    // Function to handle "Load All Customers" button click
+    const handleLoadAllCustomers = () => {
+        loadAllCustomers(setTableData);
+        setIsDataLoaded(true);
+    };
+
     return (
         <>
             {/* Header */}
@@ -48,7 +57,8 @@ const CustomerForm = () => {
                     <UpdateCustomerModel/>
                     {/*delete customer button with model*/}
                     <DeleteCustomerModel/>
-                    <Button id="btn_Get_All_Customers" type="button" variant="outline-info" className="btn col-5">
+                    <Button onClick={handleLoadAllCustomers} id="btn_Get_All_Customers" type="button"
+                            variant="outline-info" className="btn col-5">
                         View All Customers
                     </Button>
                 </div>
@@ -61,10 +71,21 @@ const CustomerForm = () => {
                             <th className="text-center">Customer ID</th>
                             <th className="text-center">Customer Name</th>
                             <th className="text-center">Customer Address</th>
-                            <th className="text-center">Customer Salary</th>
+                            <th className="text-center">Customer Contact</th>
                         </tr>
                         </thead>
-                        {LoadAllCustomers()}
+                        {isDataLoaded && (
+                            <tbody>
+                            {tableData.map((customer) => (
+                                <tr key={customer.id}>
+                                    <td>{customer.id}</td>
+                                    <td>{customer.name}</td>
+                                    <td>{customer.address}</td>
+                                    <td>{customer.contact}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        )}
                     </Table>
                 </div>
             </main>

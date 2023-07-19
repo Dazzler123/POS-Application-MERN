@@ -1,38 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// customerService.js
+import axios from "axios";
 
-export const LoadAllCustomers = () => {
-    const loadAllCustomers = () => {
+//backend URI
+const baseURL = 'http://localhost:3000';
 
-    }
-    const [tableData, setTableData] = useState([]);
 
-    useEffect(() => {
-        const backendURL = 'http://localhost:3000';
+// Function to fetch all customers data
+export const loadAllCustomers = (setData) => {
+    axios.get(`${baseURL}/api/v1/customer/all`)
+        .then((response) => {
+            // Handle the response and update the tableData state
+            console.log(response.data)
+            setData(response.data);
+        })
+        .catch((error) => {
+            console.error('Error fetching data:', error);
+        });
+};
 
-        axios.get(`${backendURL}/api/v1/customer/all`)
-            .then((response) => {
-                // Handle the response and update the tableData state
-                console.log(response.data)
-                setTableData(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    }, []);
+// Function to save a new customer
+export const saveCustomer = (customerData) => {
+    axios.post(`${baseURL}/api/v1/customer`, customerData)
+        .then((response) => {
+            console.log("Customer saved successfully:", response.data);
+            return true;
+        })
+        .catch((error) => {
+            console.error('Error saving customer:', error);
+            return false;
+        });
+};
 
-    return (
-        <tbody>
-        {tableData.map((customer) => (
-            <tr key={customer.id}>
-                <td>{customer.id}</td>
-                <td>{customer.name}</td>
-                <td>{customer.address}</td>
-                <td>{customer.contact}</td>
-            </tr>
-        ))}
-        </tbody>
-    )
-}
+// Function to update a customer
+export const updateCustomer = (customerId, customerData) => {
+    axios.put(`${baseURL}/api/v1/customer/${customerId}`, customerData)
+        .then((response) => {
+            console.log("Customer updated successfully :", response.data);
+        })
+        .catch((error) => {
+            console.error('Error updating customer :', error);
+        });
+};
 
-export default {LoadAllCustomers};
+// Function to delete a customer
+export const deleteCustomer = (customerId) => {
+    axios.delete(`${baseURL}/api/v1/customer/${customerId}`)
+        .then((response) => {
+            console.log("Customer deleted successfully:", response.data);
+
+        })
+        .catch((error) => {
+            console.error('Error deleting customer:', error);
+        });
+};
