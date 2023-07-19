@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, Form, Button, Modal, Table} from 'react-bootstrap';
 import {LoadAllCustomers} from "../controller/CustomerFormController";
 import NavbarHeader from "../NavbarHeader";
+import AddNewCustomerModel from "./AddNewCustomerModel";
 
 const CustomerForm = () => {
     return (
@@ -39,10 +40,7 @@ const CustomerForm = () => {
 
                 {/* CRUD buttons */}
                 <div className="container row col-md-6 gap-3 mt-3 mb-3 justify-content-center col-sm-12">
-                    <Button id="btn_Add_Customer" type="button" variant="outline-success" className="btn col-5"
-                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        + Add New Customer
-                    </Button>
+                    <AddNewCustomerModel/>
                     <Button id="btn_Update_Customer" type="button" variant="outline-warning" className="btn col-5"
                             data-bs-toggle="modal" data-bs-target="#staticBackdrop2" disabled>
                         Update Customer
@@ -56,12 +54,6 @@ const CustomerForm = () => {
                     </Button>
                 </div>
 
-                {/* Save customer modal */}
-                <Modal show={false} onHide={() => {
-                }} id="staticBackdrop" backdrop="static" keyboard={false} tabIndex="-1"
-                       aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    {/* Modal content */}
-                </Modal>
 
                 {/* Update customer modal */}
                 <Modal show={false} onHide={() => {
