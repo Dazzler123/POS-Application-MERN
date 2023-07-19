@@ -55,13 +55,6 @@ const CustomerForm = () => {
                 </div>
 
 
-                {/* Update customer modal */}
-                <Modal show={false} onHide={() => {
-                }} id="staticBackdrop2" backdrop="static" keyboard={false} tabIndex="-1"
-                       aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    {/* Modal content */}
-                </Modal>
-
                 {/* Delete customer modal */}
                 <Modal show={false} onHide={() => {
                 }} id="staticBackdrop3" backdrop="static" keyboard={false} tabIndex="-1"
