@@ -3,6 +3,7 @@ import {Card, Form, Button, Modal, Table} from 'react-bootstrap';
 import {LoadAllCustomers} from "../controller/CustomerFormController";
 import NavbarHeader from "../NavbarHeader";
 import AddNewCustomerModel from "./AddNewCustomerModel";
+import UpdateCustomerModel from "./UpdateCustomerModel";
 
 const CustomerForm = () => {
     return (
@@ -40,11 +41,10 @@ const CustomerForm = () => {
 
                 {/* CRUD buttons */}
                 <div className="container row col-md-6 gap-3 mt-3 mb-3 justify-content-center col-sm-12">
+                    {/*add new customer button with model*/}
                     <AddNewCustomerModel/>
-                    <Button id="btn_Update_Customer" type="button" variant="outline-warning" className="btn col-5"
-                            data-bs-toggle="modal" data-bs-target="#staticBackdrop2" disabled>
-                        Update Customer
-                    </Button>
+                    {/*update customer button with model*/}
+                    <UpdateCustomerModel/>
                     <Button id="btn_Delete_Customer" type="button" variant="outline-danger" className="btn col-5"
                             data-bs-toggle="modal" data-bs-target="#staticBackdrop3" disabled>
                         - Delete Customer
