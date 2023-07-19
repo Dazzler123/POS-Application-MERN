@@ -1,37 +1,12 @@
 import React from 'react';
-import { Navbar, Nav, Container, Card, Form, Button, Modal, Table } from 'react-bootstrap';
+import {Card, Form, Button, Modal, Table } from 'react-bootstrap';
+import NavbarHeader from "./NavbarHeader";
 
 const ItemForm = () => {
     return (
         <>
             {/* Header */}
-            <header id="header_container">
-                <Navbar expand="lg" fixed="top" style={{ backgroundColor: '#e3f2fd' }}>
-                    <Container fluid>
-                        {/* Heading & Icon */}
-                        <Navbar.Brand href="#" className="font-weight-bold">
-                            Dazzler's POS System
-                        </Navbar.Brand>
-                        <Navbar.Toggle aria-controls="navbarSupportedContent" />
-                        <Navbar.Collapse id="navbarSupportedContent">
-                            <Nav className="me-auto mb-2 mb-lg-0">
-                                {/* Home */}
-                                <Nav.Link id="btn_To_Home" href="#" active>
-                                    Home
-                                </Nav.Link>
-                                {/* Orders */}
-                                <Nav.Link id="btn_To_Manage_Orders" href="#" active>
-                                    Orders
-                                </Nav.Link>
-                                {/* Items */}
-                                <Nav.Link id="btn_To_Items" href="#" active>
-                                    Items
-                                </Nav.Link>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-            </header>
+            <NavbarHeader/>
 
             {/* Item form */}
             <main id="item_main_container" className="container-fluid bg-light row me-0 pe-0 ms-0 mt-5 ps-0 justify-content-around">
@@ -60,16 +35,16 @@ const ItemForm = () => {
 
                 {/* CRUD buttons */}
                 <div className="container row col-md-6 gap-3 mt-3 mb-3 justify-content-center col-sm-12">
-                    <Button id="btn_Add_Item" type="button" className="btn-outline-success col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
+                    <Button id="btn_Add_Item" type="button" variant="outline-success" className="col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
                         + Add New Item
                     </Button>
-                    <Button id="btn_Update_Item" type="button" className="btn-outline-warning col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" disabled>
+                    <Button id="btn_Update_Item" type="button" variant="outline-warning" className="col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop5" disabled>
                         Update Item
                     </Button>
-                    <Button id="btn_Delete_Item" type="button" className="btn-outline-danger col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop6" disabled>
+                    <Button id="btn_Delete_Item" type="button" variant="outline-danger" className="col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop6" disabled>
                         - Delete Item
                     </Button>
-                    <Button id="btn_Get_All_Items" type="button" className="btn-outline-primary col-5">
+                    <Button id="btn_Get_All_Items" type="button" variant="outline-primary" className="col-5">
                         View All Items
                     </Button>
                 </div>

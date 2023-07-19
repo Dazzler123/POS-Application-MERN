@@ -1,10 +1,10 @@
 import React from 'react';
-import {Container, Navbar, Nav, Button, Row, Col, Card, Image} from 'react-bootstrap';
+import {Container, Row, Col, Image} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBoxesStacked, faCartShopping, faList, faUser} from '@fortawesome/free-solid-svg-icons';
 
 import bgImage from '../assets/Woman cashier at checkout in shop or supermarket.jpg';
-import navbarIcon from '../assets/1892627.png';
+import NavbarHeader from "./NavbarHeader";
 
 
 export const DashboardForm = () => {
@@ -50,37 +50,8 @@ export const DashboardForm = () => {
     return (
         <>
             <Container fluid>
-                <header id="header_container">
-                    <Navbar expand="lg" fixed="top" style={styles}>
-                        <Container fluid>
-                            <Navbar.Brand href="#">
-                                <Image src={navbarIcon} alt="Logo" width="30" height="30"
-                                       className="d-inline-block align-text-top"/>{' '}
-                                Dazzler's POS System
-                            </Navbar.Brand>
-                            <Navbar.Toggle aria-controls="navbarSupportedContent"/>
-                            <Navbar.Collapse id="navbarSupportedContent">
-                                <Nav className="me-auto mb-2 mb-lg-0">
-                                    <Nav.Item>
-                                        <Nav.Link id="btn_To_Home" href="#" active className="link-primary">
-                                            Home
-                                        </Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link id="btn_To_Manage_Orders" href="#" active className="link-primary">
-                                            Orders
-                                        </Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link id="btn_To_Items" href="#" active className="link-primary">
-                                            Items
-                                        </Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
-                            </Navbar.Collapse>
-                        </Container>
-                    </Navbar>
-                </header>
+                {/* Header */}
+                <NavbarHeader/>
             </Container>
 
             <Container fluid className="row me-0 pe-0 ms-0 ps-0 overflow-hidden mt-5">

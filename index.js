@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const mongoURI = 'mongodb://127.0.0.1:27017/POS';
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ mongoose.connect(mongoURI, {useNewUrlParser: true, useUnifiedTopology: true})
     });
 
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
     console.log(req.path, req.method);
