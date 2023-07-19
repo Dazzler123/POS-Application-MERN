@@ -4,6 +4,7 @@ import {LoadAllCustomers} from "../controller/CustomerFormController";
 import NavbarHeader from "../NavbarHeader";
 import AddNewCustomerModel from "./AddNewCustomerModel";
 import UpdateCustomerModel from "./UpdateCustomerModel";
+import DeleteCustomerModel from "./DeleteCustomerModel";
 
 const CustomerForm = () => {
     return (
@@ -45,22 +46,12 @@ const CustomerForm = () => {
                     <AddNewCustomerModel/>
                     {/*update customer button with model*/}
                     <UpdateCustomerModel/>
-                    <Button id="btn_Delete_Customer" type="button" variant="outline-danger" className="btn col-5"
-                            data-bs-toggle="modal" data-bs-target="#staticBackdrop3" disabled>
-                        - Delete Customer
-                    </Button>
+                    {/*delete customer button with model*/}
+                    <DeleteCustomerModel/>
                     <Button id="btn_Get_All_Customers" type="button" variant="outline-info" className="btn col-5">
                         View All Customers
                     </Button>
                 </div>
-
-
-                {/* Delete customer modal */}
-                <Modal show={false} onHide={() => {
-                }} id="staticBackdrop3" backdrop="static" keyboard={false} tabIndex="-1"
-                       aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    {/* Modal content */}
-                </Modal>
 
                 {/* Customer details table */}
                 <div className="container mt-5 justify-content-center col-md-12 col-sm-12">
