@@ -60,16 +60,16 @@ const CustomerForm = () => {
 
                 {/* CRUD buttons */}
                 <div className="container row col-md-6 gap-3 mt-3 mb-3 justify-content-center col-sm-12">
-                    <Button id="btn_Add_Customer" type="button" className="btn btn-outline-success col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <Button id="btn_Add_Customer" type="button" variant="outline-success" className="btn col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         + Add New Customer
                     </Button>
-                    <Button id="btn_Update_Customer" type="button" className="btn btn-outline-warning col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                    <Button id="btn_Update_Customer" type="button" variant="outline-warning" className="btn col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" disabled>
                         Update Customer
                     </Button>
-                    <Button id="btn_Delete_Customer" type="button" className="btn btn-outline-danger col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                    <Button id="btn_Delete_Customer" type="button" variant="outline-danger" className="btn col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" disabled>
                         - Delete Customer
                     </Button>
-                    <Button id="btn_Get_All_Customers" type="button" className="btn btn-outline-primary col-5">
+                    <Button id="btn_Get_All_Customers" type="button" variant="outline-info" className="btn col-5">
                         View All Customers
                     </Button>
                 </div>
