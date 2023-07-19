@@ -3,6 +3,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import {saveCustomer} from "../controller/CustomerFormController";
 import CustomerDTO from "../../dto/CustomerDTO";
 import $ from 'jquery';
+import { showAlert } from "../Alerts";
 
 const AddNewCustomerModel = () => {
     const [showModal, setShowModal] = useState(false);
@@ -29,6 +30,9 @@ const AddNewCustomerModel = () => {
 
         // Close the modal after saving the customer
         handleCloseModal();
+
+        //trigger alert
+        showAlert("center", "success", "Customer Saved Successfully!");
     }
 
     return (
