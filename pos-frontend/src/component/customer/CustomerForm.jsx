@@ -63,7 +63,7 @@ export const CustomerForm = () => {
                     {/*update customer button with model*/}
                     <UpdateCustomerModel rowData={selectedRowData} />
                     {/*delete customer button with model*/}
-                    <DeleteCustomerModel/>
+                    <DeleteCustomerModel rowData={selectedRowData}/>
                     <Button onClick={handleLoadAllCustomers} id="btn_Get_All_Customers" type="button"
                             variant="outline-info" className="btn col-5">
                         View All Customers

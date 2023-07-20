@@ -1,16 +1,57 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Button, Modal } from "react-bootstrap";
+import $ from "jquery";
+import {updateCustomer} from "../controller/CustomerFormController";
+import {showAlert} from "../Alerts";
 
-const DeleteCustomerModel = () => {
+const DeleteCustomerModel = ({ rowData, closeModal }) => {
     const [showModal, setShowModal] = useState(false);
+    const [customerId, setCustomerId] = useState(false);
+    const [customerName, setCustomerName] = useState(false);
+
+    // State variables to store the updated customer data
+    const [customerData, setCustomerData] = useState({
+        objectId:"",
+        id: "",
+        name: "",
+    });
+
+    // useEffect to update the fields with the row data when the rowData prop changes
+    useEffect(() => {
+        if (rowData) {
+            setCustomerData({
+                objectId: rowData?._id || '',
+                id: rowData?.id || '',
+                name: rowData?.name || '',
+            });
+        }
+    }, [rowData]);
 
     const handleOpenModal = () => {
         setShowModal(true);
+        //show customer's id and name in the model
+        setCustomerId(customerData.id);
+        setCustomerName(customerData.name);
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+    function btnDeleteCustomerOnClick() {
+        console.log(customerData.objectId)
+
+        // // Check if objectId is not empty or null before updating
+        // if (updateCustomer(customerData.objectId, newCustomer)) {
+        //     //trigger alert
+        //     showAlert("center", "success", "Customer Updated Successfully!");
+        // } else {
+        //     //trigger alert
+        //     showAlert("center", "error", "Update customer process failed!");
+        // }
+        // Close the modal after saving the customer
+        handleCloseModal();
+    }
 
     return (
         <>
@@ -37,17 +78,17 @@ const DeleteCustomerModel = () => {
                                 Are you sure you want to delete this customer?
                             </label>
                             <br />
-                            <label className="form-label fw-semibold">ID:</label>
+                            <label className="form-label fw-semibold">ID&nbsp;:&nbsp;</label>
                             <label id="lbl_Customer_ID" className="form-label fw-semibold">
-                                {/* Add the customer ID here */}
+                                {customerId}
                             </label>
                             <br />
-                            <label className="form-label fw-semibold">Name:</label>
+                            <label className="form-label fw-semibold">Name&nbsp;:&nbsp;&nbsp;</label>
                             <label
                                 id="lbl_Customer_Name"
                                 className="form-label fw-semibold"
                             >
-                                {/* Add the customer name here */}
+                                {customerName}
                             </label>
                         </div>
                     </Modal.Body>
