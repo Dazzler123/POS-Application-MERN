@@ -18,9 +18,9 @@ router.get('/:id', getCustomerById);
 router.post('/', saveCustomer);
 
 //delete customer by id
-router.delete('/:id', deleteCustomer);
+router.delete('/:objectId', deleteCustomer);
 
 //update customer by id
-router.patch('/:id', updateCustomer);
+router.put('/:objectId', updateCustomer);
 
 module.exports = router;

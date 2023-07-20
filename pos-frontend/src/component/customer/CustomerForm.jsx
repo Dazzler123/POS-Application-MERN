@@ -9,11 +9,18 @@ import React, {useState} from "react";
 export const CustomerForm = () => {
     const [tableData, setTableData] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
+    const [selectedRowData, setSelectedRowData] = useState(null); // State to store the data of the clicked row
 
     // Function to handle "Load All Customers" button click
     const handleLoadAllCustomers = () => {
         loadAllCustomers(setTableData);
         setIsDataLoaded(true);
+    };
+
+    // Function to handle row click event
+    const handleRowClick = (rowData) => {
+        console.log(rowData)
+        setSelectedRowData(rowData);
     };
 
     return (
@@ -54,7 +61,7 @@ export const CustomerForm = () => {
                     {/*add new customer button with model*/}
                     <AddNewCustomerModel/>
                     {/*update customer button with model*/}
-                    <UpdateCustomerModel/>
+                    <UpdateCustomerModel rowData={selectedRowData} />
                     {/*delete customer button with model*/}
                     <DeleteCustomerModel/>
                     <Button onClick={handleLoadAllCustomers} id="btn_Get_All_Customers" type="button"
@@ -77,7 +84,9 @@ export const CustomerForm = () => {
                         {isDataLoaded && (
                             <tbody>
                             {tableData.map((customer) => (
-                                <tr key={customer.id}>
+                                <tr key={customer.objectId}
+                                    onClick={() => handleRowClick(customer)} // Call the handleRowClick function on row click
+                                    >
                                     <td>{customer.id}</td>
                                     <td>{customer.name}</td>
                                     <td>{customer.address}</td>

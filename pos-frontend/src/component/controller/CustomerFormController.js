@@ -33,12 +33,14 @@ export const saveCustomer = (customerData) => {
 
 // Function to update a customer
 export const updateCustomer = (customerId, customerData) => {
-    axios.put(`${baseURL}/api/v1/customer/${customerId}`, customerData)
+    return axios.put(`${baseURL}/api/v1/customer/${customerId}`, customerData)
         .then((response) => {
             console.log("Customer updated successfully :", response.data);
+            return true;
         })
         .catch((error) => {
             console.error('Error updating customer :', error);
+            return false;
         });
 };
 
@@ -47,9 +49,10 @@ export const deleteCustomer = (customerId) => {
     axios.delete(`${baseURL}/api/v1/customer/${customerId}`)
         .then((response) => {
             console.log("Customer deleted successfully:", response.data);
-
+            return true;
         })
         .catch((error) => {
             console.error('Error deleting customer:', error);
+            return false;
         });
 };

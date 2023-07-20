@@ -39,24 +39,26 @@ const saveCustomer = async (req, res) => {
 }
 
 const updateCustomer = async (req, res) => {
-    const {id} = req.params;
+    const { objectId } = req.params;
+    const { id, name, address, contact } = req.body;
 
-    //check if the object id of the document is valid
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: "No such customer found!"})
+    if (!mongoose.Types.ObjectId.isValid(objectId)) {
+        return res.status(404).json({ error: "Invalid ObjectId" });
     }
 
-    //update customer
-    const customer = await Customer.findOneAndUpdate({_id: id},{
-        ...req.body
-    });
-
-    //check if customer is available or not
-    if (!customer) {
-        return res.status(404).json({error: "No such customer found!"});
+    try {
+        const updatedCustomer = await Customer.findOneAndUpdate(
+            { _id: objectId },
+            { id, name, address, contact },
+            { new: true, runValidators: true } // This will run the Mongoose validation
+        );
+        if (!updatedCustomer) {
+            return res.status(404).json({ error: "No such customer found!" });
+        }
+        return res.status(200).json(updatedCustomer);
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
     }
-    //send response
-    res.status(200).json(customer);
 }
 
 const deleteCustomer = async (req, res) => {

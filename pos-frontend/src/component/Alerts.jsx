@@ -12,7 +12,7 @@ export const showAlert = (position, icon, title) => {
         icon: icon,
         title: title,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1550
     });
 };
 
