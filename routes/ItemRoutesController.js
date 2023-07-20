@@ -19,9 +19,9 @@ router.get('/:id', getItemById);
 router.post('/', saveItem);
 
 //delete item by id
-router.delete('/:id', deleteItem);
+router.delete('/:objectId', deleteItem);
 
 //update item by id
-router.patch('/:id', updateItem);
+router.put('/:objectId', updateItem);
 
 module.exports = router;

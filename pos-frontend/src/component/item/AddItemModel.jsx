@@ -1,5 +1,9 @@
 import {Button, Form, Modal} from "react-bootstrap";
 import React, {useState} from 'react';
+import ItemDTO from "../../dto/ItemDTO";
+import $ from "jquery";
+import {showAlert} from "../Alerts";
+import {saveItem} from "../controller/ItemFormController";
 
 const AddItemModel = () => {
     const [showModal, setShowModal] = useState(false);
@@ -12,9 +16,27 @@ const AddItemModel = () => {
         setShowModal(false);
     };
 
+    function btnSaveItemOnClick() {
+        const newItem = new ItemDTO(
+            $('#txt_Item_Code').val(),
+            $('#txt_Item_Name').val(),
+            $('#txt_Price_Per_Unit').val(),
+            $('#txt_QTY_On_Hand').val()
+        );
+        // pass newItem object to saveItem to send to backend
+        saveItem(newItem);
+
+        // Close the modal after saving the item
+        handleCloseModal();
+
+        //trigger alert
+        showAlert("center", "success", "Item Saved Successfully!");
+    }
+
     return (
         <>
-            <Button onClick={handleOpenModal} id="btn_Add_Item" type="button" variant="outline-success" className="col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
+            <Button onClick={handleOpenModal} id="btn_Add_Item" type="button" variant="outline-success"
+                    className="col-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
                 + Add New Item
             </Button>
 
@@ -82,7 +104,7 @@ const AddItemModel = () => {
                     <Button variant="secondary" data-bs-dismiss="modal" onClick={handleCloseModal}>
                         Cancel
                     </Button>
-                    <Button id="btn_Add_New_Item" variant="primary">
+                    <Button onClick={btnSaveItemOnClick} id="btn_Add_New_Item" variant="primary">
                         Save Item
                     </Button>
                 </Modal.Footer>

@@ -1,8 +1,33 @@
 import {Button, Form, Modal} from "react-bootstrap";
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import $ from "jquery";
+import {showAlert} from "../Alerts";
+import {updateItem} from "../controller/ItemFormController";
 
-const UpdateItemModel = () => {
+const UpdateItemModel = ({ rowData, closeModal }) => {
     const [showModal, setShowModal] = useState(false);
+
+    // State variables to store the updated customer data
+    const [itemData, setItemData] = useState({
+        objectId:"",
+        item_code: "",
+        item_name: "",
+        unit_price: "",
+        qty_on_hand: "",
+    });
+
+    // useEffect to update the fields with the row data when the rowData prop changes
+    useEffect(() => {
+        if (rowData) {
+            setItemData({
+                objectId: rowData?._id || '',
+                item_code: rowData?.item_code || '',
+                item_name: rowData?.item_name || '',
+                unit_price: rowData?.unit_price || '',
+                qty_on_hand: rowData?.qty_on_hand || '',
+            });
+        }
+    }, [rowData]);
 
     const handleOpenModal = () => {
         setShowModal(true);
@@ -11,6 +36,28 @@ const UpdateItemModel = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+    function btnUpdateItemOnClick() {
+        const newItem = {
+            item_code: $('#txt_Update_Item_Code').val(),
+            item_name: $('#txt_Update_Item_Name').val(),
+            unit_price: $('#txt_Update_Price_Per_Unit').val(),
+            qty_on_hand: $('#txt_Update_QTY_On_Hand').val()
+        };
+
+        // console.log(newItem)
+        console.log(itemData.objectId)
+        // Check if objectId is not empty or null before updating
+        if (updateItem(itemData.objectId, newItem)) {
+            //trigger alert
+            showAlert("center", "success", "Item Updated Successfully!");
+        } else {
+            //trigger alert
+            showAlert("center", "error", "Update item process failed!");
+        }
+        // Close the modal after saving the item
+        handleCloseModal();
+    }
 
     return (
         <>
@@ -58,7 +105,7 @@ const UpdateItemModel = () => {
                     <Button variant="secondary" onClick={handleCloseModal}>
                         Cancel
                     </Button>
-                    <Button id="btn_Update_Item_Details" variant="primary" onClick={() => {}}>
+                    <Button onClick={btnUpdateItemOnClick} id="btn_Update_Item_Details" variant="primary">
                         Update Item
                     </Button>
                 </Modal.Footer>
