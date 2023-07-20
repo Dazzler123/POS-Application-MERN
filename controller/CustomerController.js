@@ -15,7 +15,8 @@ const getCustomerById = async (req, res) => {
     console.log(id);
 
     try {
-        const customer = await Customer.findOne({id: id});
+        // Find the customer by the custom field 'id' and exclude the '_id' field
+        const customer = await Customer.findOne({id: id}).select('-_id');
 
         //check if customer is available or not
         if (!customer) {
