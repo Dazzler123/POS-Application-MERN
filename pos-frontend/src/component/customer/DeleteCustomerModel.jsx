@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Button, Modal } from "react-bootstrap";
-import $ from "jquery";
-import {updateCustomer} from "../controller/CustomerFormController";
+import {deleteCustomer, loadAllCustomers} from "../controller/CustomerFormController";
 import {showAlert} from "../Alerts";
 
 const DeleteCustomerModel = ({ rowData, closeModal }) => {
@@ -41,15 +40,17 @@ const DeleteCustomerModel = ({ rowData, closeModal }) => {
     function btnDeleteCustomerOnClick() {
         console.log(customerData.objectId)
 
-        // // Check if objectId is not empty or null before updating
-        // if (updateCustomer(customerData.objectId, newCustomer)) {
-        //     //trigger alert
-        //     showAlert("center", "success", "Customer Updated Successfully!");
-        // } else {
-        //     //trigger alert
-        //     showAlert("center", "error", "Update customer process failed!");
-        // }
-        // Close the modal after saving the customer
+        // Check if objectId is not empty or null before deleting
+        if (deleteCustomer(customerData.objectId)) {
+            //trigger alert
+            showAlert("center", "success", "Customer Deleted Successfully!");
+            //reload all customers to the table
+            loadAllCustomers();
+        } else {
+            //trigger alert
+            showAlert("center", "error", "Delete customer process failed!");
+        }
+        // Close the modal after deleting the customer
         handleCloseModal();
     }
 
@@ -96,7 +97,7 @@ const DeleteCustomerModel = ({ rowData, closeModal }) => {
                         <Button variant="secondary" onClick={handleCloseModal}>
                             No
                         </Button>
-                        <Button id="btn_Delete_Customer_Details" variant="danger">
+                        <Button onClick={btnDeleteCustomerOnClick} variant="danger">
                             Yes
                         </Button>
                     </Modal.Footer>

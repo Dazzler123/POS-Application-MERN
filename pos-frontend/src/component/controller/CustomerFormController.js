@@ -46,7 +46,7 @@ export const updateCustomer = (customerId, customerData) => {
 
 // Function to delete a customer
 export const deleteCustomer = (customerId) => {
-    axios.delete(`${baseURL}/api/v1/customer/${customerId}`)
+    return axios.delete(`${baseURL}/api/v1/customer/${customerId}`)
         .then((response) => {
             console.log("Customer deleted successfully:", response.data);
             return true;
