@@ -1,15 +1,17 @@
 import {Card, Form, Button, Table} from 'react-bootstrap';
 import NavbarHeader from "../NavbarHeader";
-import {loadAllCustomers} from "../controller/CustomerFormController";
+import {loadAllCustomers, searchCustomerById} from "../controller/CustomerFormController";
 import AddNewCustomerModel from "./AddNewCustomerModel";
 import UpdateCustomerModel from "./UpdateCustomerModel";
 import DeleteCustomerModel from "./DeleteCustomerModel";
 import React, {useState} from "react";
+import {showAlert} from "../Alerts";
 
 export const CustomerForm = () => {
     const [tableData, setTableData] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [selectedRowData, setSelectedRowData] = useState(null); // State to store the data of the clicked row
+    const [searchCustomerID, setSearchCustomerID] = useState(""); // State to hold the entered customer ID
 
     // Function to handle "Load All Customers" button click
     const handleLoadAllCustomers = () => {
@@ -21,6 +23,33 @@ export const CustomerForm = () => {
     const handleRowClick = (rowData) => {
         console.log(rowData)
         setSelectedRowData(rowData);
+    };
+
+    // Function to handle search button click
+    const handleSearchCustomer = () => {
+        if (searchCustomerID.trim() !== "") {
+            searchCustomerById(searchCustomerID)
+                .then((customerData) => {
+                    console.log(customerData)
+                    // Add the fetched customer data to the tableData state to display it as a row
+                    setTableData([customerData]);
+                    setIsDataLoaded(true); // Set isDataLoaded to true to display the table
+                    //trigger alert
+                    showAlert("center", "info", "Customer found!");
+                })
+                .catch((error) => {
+                    console.error("Error fetching customer:", error);
+                    //trigger alert
+                    showAlert("center", "error", "Invalid id, No such customer found!");
+                });
+        }
+    };
+
+    // Function to handle enter key press in the search text field
+    const handleEnterKeyPress = (event) => {
+        if (event.key === "Enter") {
+            handleSearchCustomer();
+        }
     };
 
     return (
@@ -40,8 +69,14 @@ export const CustomerForm = () => {
                     <Card.Body className="border-0 p-0">
                         <div style={{marginTop: '17px'}} className="d-flex col-8 ms-3" role="search">
                             <Form.Control id="txt_Search_Cus_ID" className="me-2" type="search" placeholder="Search"
-                                          aria-label="Search"/>
-                            <Button id="btn_Search_Customer" variant="outline-success" type="submit">
+                                          aria-label="Search" value={searchCustomerID}
+                                          onChange={(e) => setSearchCustomerID(e.target.value)}
+                                          onKeyPress={handleEnterKeyPress} // Call the handleSearchCustomer function on
+                                // enter key press
+                            />
+                            <Button id="btn_Search_Customer" variant="outline-success" type="submit"
+                                    onClick={handleSearchCustomer} // Call the handleSearchCustomer function on button click
+                            >
                                 Search
                             </Button>
                         </div>

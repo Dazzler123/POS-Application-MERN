@@ -18,6 +18,21 @@ export const loadAllCustomers = (setData) => {
         });
 };
 
+// Function to fetch a customer by ID
+export const searchCustomerById = (customerId) => {
+    return new Promise((resolve, reject) => {
+        axios.get(`${baseURL}/api/v1/customer/${customerId}`)
+            .then((response) => {
+                // Resolve with the customer data
+                resolve(response.data);
+            })
+            .catch((error) => {
+                // Reject with the error
+                reject(error);
+            });
+    });
+};
+
 // Function to save a new customer
 export const saveCustomer = (customerData) => {
     axios.post(`${baseURL}/api/v1/customer`, customerData)
