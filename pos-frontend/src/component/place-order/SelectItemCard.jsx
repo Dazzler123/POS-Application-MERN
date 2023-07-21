@@ -5,6 +5,7 @@ import {searchItemById} from "../controller/ItemFormController";
 
 export const SelectItemCard = () => {
     const [selectedItem, setSelectedItem] = useState('None');
+    const [itemData, setItemData] = useState('None');
     const [comboBoxData, setComboBoxData] = useState([]);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
 
@@ -26,11 +27,7 @@ export const SelectItemCard = () => {
         //search item and get details
         try {
             // Search item and get details using the selectedOptionText as the itemCode
-            const itemData = await searchItemById(selectedOptionText);
-            // Set the item data to the corresponding fields
-            document.getElementById('txtAvailableQTYOnHand').value = itemData.qty_on_hand;
-            document.getElementById('txtItemName').value = itemData.item_name;
-            document.getElementById('txtUnitPrice').value = itemData.unit_price;
+            setItemData(await searchItemById(selectedOptionText));
         } catch (error) {
             console.error('Error fetching item data:', error);
             // You can handle errors here
@@ -61,7 +58,7 @@ export const SelectItemCard = () => {
                                     id="txtAvailableQTYOnHand"
                                     className="form-control text-danger"
                                     type="number"
-                                    value=""
+                                    value={itemData.qty_on_hand}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
@@ -73,7 +70,7 @@ export const SelectItemCard = () => {
                                     id="txtItemName"
                                     className="form-control text-danger"
                                     type="text"
-                                    value=""
+                                    value={itemData.item_name}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
@@ -85,7 +82,7 @@ export const SelectItemCard = () => {
                                     id="txtUnitPrice"
                                     className="form-control text-danger"
                                     type="number"
-                                    value=""
+                                    value={itemData.unit_price}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
@@ -102,7 +99,7 @@ export const SelectItemCard = () => {
                                 />
                             </Form.Group>
                             <Form.Group as={Col} md={5} style={{marginTop: "8%"}}>
-                                <Button id="btnAddToCart" type="button" className="btn btn-warning">
+                                <Button id="btnAddToCart" type="button" className="btn" variant="outline-warning">
                                     + Add To Cart
                                 </Button>
                             </Form.Group>

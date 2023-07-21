@@ -6,24 +6,27 @@ import {showAlert} from "../Alerts";
 export const InvoiceDetails = () => {
     const [searchCustomerID, setSearchCustomerID] = useState(""); // State to hold the entered customer ID
     const [isDataLoaded, setIsDataLoaded] = useState(false);
-
+    const [tableData, setTableData] = useState([]);
 
     // Function to handle search button click
-    const handleSearchCustomer = () => {
+    const handleSearchCustomer = async () => {
         if (searchCustomerID.trim() !== "") {
-            searchCustomerById(searchCustomerID)
-                .then((customerData) => {
-                    console.log(customerData)
+            try {
+                const customerData = await searchCustomerById(searchCustomerID);
+                console.log(customerData);
 
-                    setIsDataLoaded(true); // Set isDataLoaded to true to display the table
-                    //trigger alert
-                    showAlert("center", "info", "Customer found!");
-                })
-                .catch((error) => {
-                    console.error("Error fetching customer:", error);
-                    //trigger alert
-                    showAlert("center", "error", "Invalid id, No such customer found!");
-                });
+                // Add the fetched customer data to the tableData state to display it as a row
+                setTableData([customerData]);
+                setIsDataLoaded(true); // Set isDataLoaded to true to display the table
+
+                // // Trigger alert
+                // showAlert("center", "info", "Customer found!");
+            } catch (error) {
+                console.error("Error fetching customer:", error);
+
+                // Trigger alert
+                showAlert("center", "error", "Invalid id, No such customer found!");
+            }
         }
     };
 
@@ -69,12 +72,12 @@ export const InvoiceDetails = () => {
                                 />
                             </Form.Group>
                             <Form.Group as={Col} md={6}>
-                                <Form.Label>Customer Salary : </Form.Label>
+                                <Form.Label>Customer Contact : </Form.Label>
                                 <Form.Control
                                     id="txtCusSalary"
                                     className="form-control text-danger"
-                                    type="number"
-                                    value=""
+                                    type="text"
+                                    value={tableData[0]?.contact || ""}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
@@ -86,7 +89,7 @@ export const InvoiceDetails = () => {
                                     id="txtCusName"
                                     className="form-control text-danger"
                                     type="text"
-                                    value=""
+                                    value={tableData[0]?.name || ""}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
@@ -98,7 +101,7 @@ export const InvoiceDetails = () => {
                                     id="txtCusAddress"
                                     className="form-control text-danger"
                                     type="text"
-                                    value=""
+                                    value={tableData[0]?.address || ""}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
