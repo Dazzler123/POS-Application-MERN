@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Container, Row, Col, Form, Button, Modal, Table, Card, Navbar} from "react-bootstrap";
 import NavbarHeader from "../NavbarHeader";
 import SelectItemCard from "./SelectItemCard";
+import InvoiceDetails from "./InvoiceDetails";
 
 const PlaceOrderForm = () => {
     const [showModal, setShowModal] = useState(false);
@@ -30,76 +31,77 @@ const PlaceOrderForm = () => {
                 </Row>
 
                 <Row className="p-0 m-0">
-                    <Container className="card ps-0 pe-0 col-md-4 ms-3 row col-sm-12">
-                        <Card>
-                            <Card.Header className="bg-primary text-white">Invoice Details</Card.Header>
-                            <Card.Body className="border-0 p-0">
-                                <Container className="row g-2 mt-1 ms-2">
-                                    <Form.Group as={Col} md={6}>
-                                        <Form.Label>Date : </Form.Label>
-                                        <Form.Control type="date" placeholder="" aria-label=""/>
-                                    </Form.Group>
-                                    <Form.Group as={Col} md={5}>
-                                        <Form.Label>Order ID : </Form.Label>
-                                        <Form.Control
-                                            id="cbxSelectOrderID"
-                                            className="form-control fw-semibold"
-                                            type="text"
-                                            value=""
-                                            aria-label="Disabled input example"
-                                            disabled
-                                        />
-                                    </Form.Group>
-                                    <Form.Group as={Col} md={5}>
-                                        <Form.Label>Enter Customer ID : </Form.Label>
-                                        <Form.Control
-                                            id="cbxSelectCustID"
-                                            className="form-control fw-semibold"
-                                            type="text"
-                                            value=""
-                                            aria-label="Disabled input example"
-                                        />
-                                    </Form.Group>
-                                    <Form.Group as={Col} md={6}>
-                                        <Form.Label>Customer Salary : </Form.Label>
-                                        <Form.Control
-                                            id="txtCusSalary"
-                                            className="form-control text-danger"
-                                            type="number"
-                                            value=""
-                                            aria-label="Disabled input example"
-                                            disabled
-                                            readOnly
-                                        />
-                                    </Form.Group>
-                                    <Form.Group as={Col} md={11}>
-                                        <Form.Label>Customer Name : </Form.Label>
-                                        <Form.Control
-                                            id="txtCusName"
-                                            className="form-control text-danger"
-                                            type="text"
-                                            value=""
-                                            aria-label="Disabled input example"
-                                            disabled
-                                            readOnly
-                                        />
-                                    </Form.Group>
-                                    <Form.Group as={Col} md={11}>
-                                        <Form.Label>Customer Address : </Form.Label>
-                                        <Form.Control
-                                            id="txtCusAddress"
-                                            className="form-control text-danger"
-                                            type="text"
-                                            value=""
-                                            aria-label="Disabled input example"
-                                            disabled
-                                            readOnly
-                                        />
-                                    </Form.Group>
-                                </Container>
-                            </Card.Body>
-                        </Card>
-                    </Container>
+                    <InvoiceDetails/>
+                    {/*<Container className="card ps-0 pe-0 col-md-4 ms-3 row col-sm-12">*/}
+                    {/*    <Card>*/}
+                    {/*        <Card.Header className="bg-primary text-white">Invoice Details</Card.Header>*/}
+                    {/*        <Card.Body className="border-0 p-0">*/}
+                    {/*            <Container className="row g-2 mt-1 ms-2">*/}
+                    {/*                <Form.Group as={Col} md={6}>*/}
+                    {/*                    <Form.Label>Date : </Form.Label>*/}
+                    {/*                    <Form.Control type="date" placeholder="" aria-label=""/>*/}
+                    {/*                </Form.Group>*/}
+                    {/*                <Form.Group as={Col} md={5}>*/}
+                    {/*                    <Form.Label>Order ID : </Form.Label>*/}
+                    {/*                    <Form.Control*/}
+                    {/*                        id="cbxSelectOrderID"*/}
+                    {/*                        className="form-control fw-semibold"*/}
+                    {/*                        type="text"*/}
+                    {/*                        value=""*/}
+                    {/*                        aria-label="Disabled input example"*/}
+                    {/*                        disabled*/}
+                    {/*                    />*/}
+                    {/*                </Form.Group>*/}
+                    {/*                <Form.Group as={Col} md={5}>*/}
+                    {/*                    <Form.Label>Enter Customer ID : </Form.Label>*/}
+                    {/*                    <Form.Control*/}
+                    {/*                        id="cbxSelectCustID"*/}
+                    {/*                        className="form-control fw-semibold"*/}
+                    {/*                        type="text"*/}
+                    {/*                        value=""*/}
+                    {/*                        aria-label="Disabled input example"*/}
+                    {/*                    />*/}
+                    {/*                </Form.Group>*/}
+                    {/*                <Form.Group as={Col} md={6}>*/}
+                    {/*                    <Form.Label>Customer Salary : </Form.Label>*/}
+                    {/*                    <Form.Control*/}
+                    {/*                        id="txtCusSalary"*/}
+                    {/*                        className="form-control text-danger"*/}
+                    {/*                        type="number"*/}
+                    {/*                        value=""*/}
+                    {/*                        aria-label="Disabled input example"*/}
+                    {/*                        disabled*/}
+                    {/*                        readOnly*/}
+                    {/*                    />*/}
+                    {/*                </Form.Group>*/}
+                    {/*                <Form.Group as={Col} md={11}>*/}
+                    {/*                    <Form.Label>Customer Name : </Form.Label>*/}
+                    {/*                    <Form.Control*/}
+                    {/*                        id="txtCusName"*/}
+                    {/*                        className="form-control text-danger"*/}
+                    {/*                        type="text"*/}
+                    {/*                        value=""*/}
+                    {/*                        aria-label="Disabled input example"*/}
+                    {/*                        disabled*/}
+                    {/*                        readOnly*/}
+                    {/*                    />*/}
+                    {/*                </Form.Group>*/}
+                    {/*                <Form.Group as={Col} md={11}>*/}
+                    {/*                    <Form.Label>Customer Address : </Form.Label>*/}
+                    {/*                    <Form.Control*/}
+                    {/*                        id="txtCusAddress"*/}
+                    {/*                        className="form-control text-danger"*/}
+                    {/*                        type="text"*/}
+                    {/*                        value=""*/}
+                    {/*                        aria-label="Disabled input example"*/}
+                    {/*                        disabled*/}
+                    {/*                        readOnly*/}
+                    {/*                    />*/}
+                    {/*                </Form.Group>*/}
+                    {/*            </Container>*/}
+                    {/*        </Card.Body>*/}
+                    {/*    </Card>*/}
+                    {/*</Container>*/}
 
                     {/*/!* Select item *!/*/}
                     <SelectItemCard/>
