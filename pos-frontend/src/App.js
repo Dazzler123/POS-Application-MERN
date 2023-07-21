@@ -13,8 +13,8 @@ function App() {
           {/*<DashboardForm/>*/}
           {/*<CustomerForm/>*/}
           {/*<ItemForm/>*/}
-          {/*<PlaceOrderForm/>*/}
-          <ManageOrderForm/>
+          <PlaceOrderForm/>
+          {/*<ManageOrderForm/>*/}
       </>
   );
 }
