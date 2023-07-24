@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CustomerForm from "./component/customer/CustomerForm";
 import ItemForm from "./component/item/ItemForm";
 import PlaceOrderForm from "./component/place-order/PlaceOrderForm";
-import ManageOrderForm from "./component/manage-order/ManageOrderForm";
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
           {/*<CustomerForm/>*/}
           {/*<ItemForm/>*/}
           <PlaceOrderForm/>
-          {/*<ManageOrderForm/>*/}
       </>
   );
 }
