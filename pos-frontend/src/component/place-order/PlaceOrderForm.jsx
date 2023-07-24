@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap';
 import NavbarHeader from "../NavbarHeader";
 
 const PlaceOrderForm = () => {
+    const [customerID, setCustomerID] = useState('');
+
+    const handleCustomerIDChange = (event) => {
+        setCustomerID(event.target.value);
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            setCustomerID(event.target.value);
+            console.log(customerID)
+        }
+    };
+
     return (
         <>
             <NavbarHeader/>
@@ -21,6 +34,30 @@ const PlaceOrderForm = () => {
                             </Col>
                             <Col md={5}>
                                 <label className="form-label">Order ID : </label>
+                                <input
+                                    id="cbxSelectOrderID"
+                                    className="form-control fw-semibold"
+                                    type="text"
+                                    value=""
+                                    aria-label="Disabled input example"
+                                    disabled
+                                />
+                                {/* To use a select component instead of an input */}
+                                {/* <select id="cbxSelectOrderID" className="form-select" aria-label="" disabled>
+              <option selected>None</option>
+            </select> */}
+                            </Col>
+                            <Col md={5}>
+                                <label className="form-label">Enter Customer ID : </label>
+                                <input
+                                    id="cbxSelectCustID"
+                                    className="form-control fw-semibold"
+                                    type="text"
+                                    value={customerID}
+                                    onChange={handleCustomerIDChange}
+                                    onKeyDown={handleKeyPress}
+                                    aria-label=""
+                                />
                             </Col>
                             <Col md={6}>
                                 <label className="form-label">Customer Salary : </label>
@@ -114,16 +151,18 @@ const PlaceOrderForm = () => {
                                 <input id="selectQTY" type="number" className="form-control text-danger" placeholder="" aria-label="" />
                             </Col>
                             <Col md={5} style={{ marginTop: '8%' }}>
-                                <Button id="btnAddToCart" variant="warning">
-                                    + Add To Cart
-                                </Button>
+                                <Button id="btnAddToCart" type="button" className="btn btn-warning">+ Add To Cart</Button>
                             </Col>
                             <Col md={12} className="row justify-content-end gap-2" style={{ marginTop: '8%' }}>
-                                {/* Uncomment these buttons when needed */}
-                                {/* <Button id="btnUpdateItemInCart" variant="info" className="col-4" disabled>
-                Update Item
-              </Button> */}
-                                <Button id="btnRemoveItemFromCart" variant="danger" className="col-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop9" disabled>
+                                {/* <Button id="btnUpdateItemInCart" type="button" className="btn btn-info col-4" disabled>Update Item</Button> */}
+                                <Button
+                                    id="btnRemoveItemFromCart"
+                                    type="button"
+                                    className="btn btn-danger col-4"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop9"
+                                    disabled
+                                >
                                     - Remove Item
                                 </Button>
                             </Col>
@@ -195,7 +234,8 @@ const PlaceOrderForm = () => {
                                 <input id="txtBalanceAmt" type="number" className="form-control" placeholder="" aria-label="" disabled />
                             </Col>
                             <Col md={12}>
-                                <Button id="btnConfirmOrder" variant="success" size="lg" className="col-11 ms-4 mt-4 mb-3 h-50">
+                                <Button id="btnConfirmOrder" variant="success" size="lg" className="col-11 ms-4 mt-4
+                                 mb-3 h-75">
                                     Confirm Order
                                 </Button>
                             </Col>
