@@ -1,18 +1,40 @@
 import React, {useState} from 'react';
 import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap';
 import NavbarHeader from "../NavbarHeader";
+import {searchCustomerById} from "../controller/CustomerFormController";
+import {showAlert} from "../Alerts";
 
 const PlaceOrderForm = () => {
     const [customerID, setCustomerID] = useState('');
+    const [customerDetails, setCustomerDetails] = useState({
+        contact: '',
+        name: '',
+        address: '',
+    });
 
     const handleCustomerIDChange = (event) => {
         setCustomerID(event.target.value);
     };
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress = async (event) => {
         if (event.key === 'Enter') {
+            //set customer id
             setCustomerID(event.target.value);
-            console.log(customerID)
+
+            //search customer
+            try {
+                const customerData = await searchCustomerById(customerID);
+                setCustomerDetails({
+                    contact: customerData.contact,
+                    name: customerData.name,
+                    address: customerData.address,
+                });
+            } catch (error) {
+                // Handle error if customer is not found
+                console.error('Customer not found:', error);
+                //trigger alert
+                showAlert("center", "error", "Invalid Customer ID, No such customer found!");
+            }
         }
     };
 
@@ -60,12 +82,12 @@ const PlaceOrderForm = () => {
                                 />
                             </Col>
                             <Col md={6}>
-                                <label className="form-label">Customer Salary : </label>
+                                <label className="form-label">Customer Contact : </label>
                                 <input
-                                    id="txtCusSalary"
+                                    id="txtCusContact"
                                     className="form-control text-danger"
-                                    type="number"
-                                    value=""
+                                    type="text"
+                                    value={customerDetails.contact}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
@@ -77,7 +99,7 @@ const PlaceOrderForm = () => {
                                     id="txtCusName"
                                     className="form-control text-danger"
                                     type="text"
-                                    value=""
+                                    value={customerDetails.name}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
@@ -89,7 +111,7 @@ const PlaceOrderForm = () => {
                                     id="txtCusAddress"
                                     className="form-control text-danger"
                                     type="text"
-                                    value=""
+                                    value={customerDetails.address}
                                     aria-label="Disabled input example"
                                     disabled
                                     readOnly
