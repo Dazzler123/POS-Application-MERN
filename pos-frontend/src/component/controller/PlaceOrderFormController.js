@@ -3,8 +3,8 @@ import axios from "axios";
 //backend URI
 const baseURL = 'http://localhost:3000';
 
-export const placeOrder = (orderObj) => {
-    axios.post(`${baseURL}/api/v1/order`, orderObj)
+export const placeOrder = async (orderObj) => {
+    await axios.post(`${baseURL}/api/v1/order`, orderObj)
         .then((response) => {
             console.log("Order placed successfully:", response.data);
             return true;

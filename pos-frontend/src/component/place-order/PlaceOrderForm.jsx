@@ -5,6 +5,7 @@ import {searchCustomerById} from "../controller/CustomerFormController";
 import {loadAllItemCodes, searchItemById} from "../controller/ItemFormController";
 import {showAlert} from "../Alerts";
 import $ from 'jquery';
+import {placeOrder} from "../controller/PlaceOrderFormController";
 
 const PlaceOrderForm = () => {
     const [customerID, setCustomerID] = useState('');
@@ -75,7 +76,32 @@ const PlaceOrderForm = () => {
     };
 
     const confirmOrder = () => {
+        let orderObj = {
+            "o_id": 2,
+            "date": "26-07-2023",
+            "customer_id": "C001",
+            "items": [
+                {
+                    "item_code": "ITM-001-001",
+                    "item_name": "Sapro Sanwich Bread 750G",
+                    "unit_price": 280.00,
+                    "qty_bought": "2 Pkts"
+                },
+                {
+                    "item_code": "ITM-001-002",
+                    "item_name": "Anchor Milk Powder 750G",
+                    "unit_price": 1560.00,
+                    "qty_bought": "1 Pkts"
+                }
+            ],
+            "tot_discount_issued": 560.00
+        }
 
+        if (placeOrder(orderObj)){
+            showAlert('center', 'success', 'Order placed successfully!');
+        } else {
+            showAlert('center', 'error', 'Process failed!');
+        }
     }
 
     return (
@@ -169,7 +195,7 @@ const PlaceOrderForm = () => {
                                     className="form-select"
                                     aria-label=""
                                     value={selectedItemCode}
-                                    onClick={(e)=>{
+                                    onClick={(e) => {
                                         e.preventDefault();
                                         loadItemCodesOnClick();
                                     }}
@@ -317,7 +343,7 @@ const PlaceOrderForm = () => {
                             <Col md={12}>
                                 <Button id="btnConfirmOrder" variant="success" size="lg" className="col-11 ms-4 mt-4
                                  mb-3 h-75"
-                                onClick={confirmOrder}>
+                                        onClick={confirmOrder}>
                                     Confirm Order
                                 </Button>
                             </Col>
