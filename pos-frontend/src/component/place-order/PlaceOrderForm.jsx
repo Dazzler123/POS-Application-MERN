@@ -1,11 +1,17 @@
-import React, {useState} from 'react';
-import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap';
+import React, {useEffect, useRef, useState} from 'react';
+import {Container, Row, Col, Button, Table, Modal} from 'react-bootstrap';
 import NavbarHeader from "../NavbarHeader";
 import {searchCustomerById} from "../controller/CustomerFormController";
+import {loadAllItemCodes, searchItemById} from "../controller/ItemFormController";
 import {showAlert} from "../Alerts";
+import $ from 'jquery';
 
 const PlaceOrderForm = () => {
     const [customerID, setCustomerID] = useState('');
+    const [itemCodes, setItemCodes] = useState([]); // State to store item codes
+    const [selectedItemCode, setSelectedItemCode] = useState('None'); // State for selected item code
+
+    //customer state model
     const [customerDetails, setCustomerDetails] = useState({
         contact: '',
         name: '',
@@ -16,6 +22,15 @@ const PlaceOrderForm = () => {
         setCustomerID(event.target.value);
     };
 
+    // Function to handle item code selection
+    const handleItemCodeChange = (event) => {
+        const selectedCode = event.target.value;
+        setSelectedItemCode(selectedCode);
+        // Additional logic to update other fields based on the selected item code
+        // ...
+    };
+
+    //search customer after ID entered
     const handleKeyPress = async (event) => {
         if (event.key === 'Enter') {
             //set customer id
@@ -38,6 +53,31 @@ const PlaceOrderForm = () => {
         }
     };
 
+    // Function to load item codes when the combo box is clicked
+    const loadItemCodesOnClick = async () => {
+        try {
+            const codes = loadAllItemCodes();
+            setItemCodes(codes);
+
+            // Clear the existing options
+            $('#cbxSelectItemCode').empty();
+
+            // Append the new options
+            $('#cbxSelectItemCode').append('<option value="None">None</option>');
+            itemCodes.forEach((itm) => {
+                $('#cbxSelectItemCode').append(`<option value="${itm.item_code}">${itm.item_code}</option>`);
+            });
+            console.log(itemCodes);
+        } catch (error) {
+            console.error('Error fetching item codes:', error);
+            showAlert('center', 'error', 'Error fetching item codes.');
+        }
+    };
+
+    const confirmOrder = () => {
+
+    }
+
     return (
         <>
             <NavbarHeader/>
@@ -52,7 +92,7 @@ const PlaceOrderForm = () => {
                         <Row className="g-2 mt-1 ms-2">
                             <Col md={6}>
                                 <label className="form-label">Date : </label>
-                                <input id="date" type="date" className="form-control" placeholder="" aria-label="" />
+                                <input id="date" type="date" className="form-control" placeholder="" aria-label=""/>
                             </Col>
                             <Col md={5}>
                                 <label className="form-label">Order ID : </label>
@@ -64,10 +104,6 @@ const PlaceOrderForm = () => {
                                     aria-label="Disabled input example"
                                     disabled
                                 />
-                                {/* To use a select component instead of an input */}
-                                {/* <select id="cbxSelectOrderID" className="form-select" aria-label="" disabled>
-              <option selected>None</option>
-            </select> */}
                             </Col>
                             <Col md={5}>
                                 <label className="form-label">Enter Customer ID : </label>
@@ -128,8 +164,22 @@ const PlaceOrderForm = () => {
                         <Row className="g-2 mt-1 ms-2">
                             <Col md={5}>
                                 <label className="form-label">Select Item Code : </label>
-                                <select id="cbxSelectItemCode" className="form-select" aria-label="">
-                                    <option selected>None</option>
+                                <select
+                                    id="cbxSelectItemCode"
+                                    className="form-select"
+                                    aria-label=""
+                                    value={selectedItemCode}
+                                    onClick={(e)=>{
+                                        e.preventDefault();
+                                        loadItemCodesOnClick();
+                                    }}
+                                    onChange={handleItemCodeChange}
+                                >
+                                    {itemCodes.map((itm) => (
+                                        <option key={itm.item_code} value={itm.item_code}>
+                                            {itm.item_code}
+                                        </option>
+                                    ))}
                                 </select>
                             </Col>
                             <Col md={6}>
@@ -170,13 +220,14 @@ const PlaceOrderForm = () => {
                             </Col>
                             <Col md={3}>
                                 <label className="form-label">Select Quantity : </label>
-                                <input id="selectQTY" type="number" className="form-control text-danger" placeholder="" aria-label="" />
+                                <input id="selectQTY" type="number" className="form-control text-danger"
+                                       placeholder="" aria-label=""/>
                             </Col>
-                            <Col md={5} style={{ marginTop: '8%' }}>
-                                <Button id="btnAddToCart" type="button" className="btn btn-warning">+ Add To Cart</Button>
+                            <Col md={5} style={{marginTop: '8%'}}>
+                                <Button id="btnAddToCart" type="button" className="btn btn-warning">+ Add To
+                                    Cart</Button>
                             </Col>
-                            <Col md={12} className="row justify-content-end gap-2" style={{ marginTop: '8%' }}>
-                                {/* <Button id="btnUpdateItemInCart" type="button" className="btn btn-info col-4" disabled>Update Item</Button> */}
+                            <Col md={12} className="row justify-content-end gap-2" style={{marginTop: '8%'}}>
                                 <Button
                                     id="btnRemoveItemFromCart"
                                     type="button"
@@ -193,7 +244,8 @@ const PlaceOrderForm = () => {
                 </Container>
 
                 {/* Remove Item from Cart Modal */}
-                <Modal show={false} backdrop="static" keyboard={false} id="staticBackdrop9" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <Modal show={false} backdrop="static" keyboard={false} id="staticBackdrop9" tabIndex="-1"
+                       aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <Modal.Dialog dialogClassName="modal-dialog-top">
                         <Modal.Header closeButton>
                             <Modal.Title id="staticBackdropLabel9">Remove Item</Modal.Title>
@@ -203,16 +255,18 @@ const PlaceOrderForm = () => {
                                 <label htmlFor="formGroupExampleInput" className="form-label">
                                     Are you sure you want to remove this item from the cart?
                                 </label>
-                                <br />
+                                <br/>
                                 <label htmlFor="formGroupExampleInput2" className="form-label fw-semibold">
                                     Code :{' '}
                                 </label>
-                                <label id="lbl_Cart_Remove_Item_Code" htmlFor="formGroupExampleInput" className="form-label fw-semibold"></label>
-                                <br />
+                                <label id="lbl_Cart_Remove_Item_Code" htmlFor="formGroupExampleInput"
+                                       className="form-label fw-semibold"></label>
+                                <br/>
                                 <label htmlFor="formGroupExampleInput" className="form-label fw-semibold">
                                     Name :{' '}
                                 </label>
-                                <label id="lbl_Cart_Remove_Item_Name" htmlFor="formGroupExampleInput" className="form-label fw-semibold"></label>
+                                <label id="lbl_Cart_Remove_Item_Name" htmlFor="formGroupExampleInput"
+                                       className="form-label fw-semibold"></label>
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
@@ -229,35 +283,41 @@ const PlaceOrderForm = () => {
                 {/* Confirm Order */}
                 <Container className="card ps-0 pe-0 col-md-3 ms-5 row col-sm-12">
                     <div className="card-body border-0 p-0">
-                        <h5 className="mt-3 ms-4 col-5 text-danger text-start fs-3" style={{ display: 'inline-block' }}>
+                        <h5 className="mt-3 ms-4 col-5 text-danger text-start fs-3" style={{display: 'inline-block'}}>
                             Total :
                         </h5>
-                        <h5 id="lblGrandTotal" className="mt-3 col-6 text-danger text-start fs-3" style={{ display: 'inline-block' }}>
+                        <h5 id="lblGrandTotal" className="mt-3 col-6 text-danger text-start fs-3"
+                            style={{display: 'inline-block'}}>
                             0 /=
                         </h5>
-                        <h5 className="mt-1 ms-4 col-5 text-danger text-start fs-3" style={{ display: 'inline-block' }}>
+                        <h5 className="mt-1 ms-4 col-5 text-danger text-start fs-3" style={{display: 'inline-block'}}>
                             Sub Total :
                         </h5>
-                        <h5 id="lblSubTotal" className="mt-1 col-5 text-danger text-start fs-3" style={{ display: 'inline-block' }}>
+                        <h5 id="lblSubTotal" className="mt-1 col-5 text-danger text-start fs-3"
+                            style={{display: 'inline-block'}}>
                             0 /=
                         </h5>
 
                         <Row className="col-12 mt-2">
                             <Col md={7} className="ms-3">
                                 <label className="form-label">Cash : </label>
-                                <input id="txtCashAmt" type="number" className="form-control" placeholder="Ex: 5000.00" aria-label="" />
+                                <input id="txtCashAmt" type="number" className="form-control"
+                                       placeholder="Ex: 5000.00" aria-label=""/>
                             </Col>
                             <Col md={4}>
                                 <label className="form-label">Discount : </label>
-                                <input id="txtDiscountGiven" type="number" className="form-control" placeholder="Ex: 15" aria-label="" />
+                                <input id="txtDiscountGiven" type="number" className="form-control"
+                                       placeholder="Ex: 15" aria-label=""/>
                             </Col>
                             <Col md={11} className="ms-3 mt-3">
                                 <label className="form-label">Balance : </label>
-                                <input id="txtBalanceAmt" type="number" className="form-control" placeholder="" aria-label="" disabled />
+                                <input id="txtBalanceAmt" type="number" className="form-control"
+                                       placeholder="" aria-label="" disabled/>
                             </Col>
                             <Col md={12}>
                                 <Button id="btnConfirmOrder" variant="success" size="lg" className="col-11 ms-4 mt-4
-                                 mb-3 h-75">
+                                 mb-3 h-75"
+                                onClick={confirmOrder}>
                                     Confirm Order
                                 </Button>
                             </Col>

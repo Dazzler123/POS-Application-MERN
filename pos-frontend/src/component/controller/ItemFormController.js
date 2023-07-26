@@ -17,6 +17,23 @@ export const loadAllItems = (setData) => {
         });
 };
 
+
+export const loadAllItemCodes = () => {
+    let itemCodes = [];
+    axios.get(`${baseURL}/api/v1/item/all`)
+        .then((response) => {
+            // get item codes from the response and add them to an array
+            let items = response.data;
+            items.forEach((item) => {
+                itemCodes.push(item)
+            });
+        })
+        .catch((error) => {
+            console.error('Error fetching data:', error);
+        });
+    return itemCodes;
+};
+
 // Function to fetch a item by ID
 export const searchItemById = (itemCode) => {
     return new Promise((resolve, reject) => {
