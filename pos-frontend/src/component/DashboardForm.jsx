@@ -2,22 +2,35 @@ import React from 'react';
 import {Container, Row, Col, Image} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBoxesStacked, faCartShopping, faList, faUser} from '@fortawesome/free-solid-svg-icons';
+import {useNavigate} from "react-router-dom";
 
 import bgImage from '../assets/Woman cashier at checkout in shop or supermarket.jpg';
-import NavbarHeader from "./NavbarHeader";
-
 
 export const DashboardForm = () => {
 
     const [isHovered, setIsHovered] = React.useState(false);
+    const navigate = useNavigate(); // Initialize useNavigate
 
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
 
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
+    function btnCustomerOnClick() {
+        // Navigate to the CustomerForm component when the "Customer" tile is clicked
+        navigate('/customer');
+    }
+
+    function btnItemOnClick() {
+        // Navigate to the ItemForm component when the "Item" tile is clicked
+        navigate('/items');
+    }
+
+    function btnPlaceOrderOnClick() {
+        // Navigate to the PlaceOrderForm component when the "Place Order" tile is clicked
+        navigate('/place-order');
+    }
+
+    function btnManageOrdersOnClick() {
+        // Navigate to the ManageOrderForm component when the "Manage Orders" tile is clicked
+        navigate('/manage-order');
+    }
 
 
     const styles = {
@@ -41,10 +54,6 @@ export const DashboardForm = () => {
 
     const btnGroupHoverStyle = {
         background: 'linear-gradient(45deg, rgba(29, 236, 197, 0.5), rgba(91, 14, 214, 0.5) 100%)'
-    }
-
-    function btnCustomerOnClick() {
-        console.log("Customer btn clicked");
     }
 
     return (
@@ -76,19 +85,22 @@ export const DashboardForm = () => {
                     </Col>
 
                     <Col id="btn_Item" className="col-4 shadow bg-body rounded-5"
-                         style={btnGroupStyle}>
+                         style={btnGroupStyle}
+                         onClick={btnItemOnClick}>
                         <FontAwesomeIcon icon={faBoxesStacked} size="5x" style={topMargin}/>
                         <h3 className="display-6 fs-3 mt-3">Item</h3>
                     </Col>
 
                     <Col id="btn_Place_Order" className="col-4 shadow bg-body rounded-5"
-                         style={btnGroupStyle}>
+                         style={btnGroupStyle}
+                         onClick={btnPlaceOrderOnClick}>
                         <FontAwesomeIcon icon={faCartShopping} size="5x" style={topMargin}/>
                         <h3 className="display-6 fs-3 mt-3">Place Order</h3>
                     </Col>
 
                     <Col id="btn_Manage_Orders" className="col-4 shadow bg-body rounded-5"
-                         style={btnGroupStyle}>
+                         style={btnGroupStyle}
+                         onClick={btnManageOrdersOnClick}>
                         <FontAwesomeIcon icon={faList} size="5x" style={topMargin}/>
                         <h3 className="display-6 fs-3 mt-3">Manage Orders</h3>
                     </Col>
