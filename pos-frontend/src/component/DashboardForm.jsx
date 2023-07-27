@@ -49,10 +49,10 @@ export const DashboardForm = () => {
 
     return (
         <>
-            <Container fluid>
-                {/* Header */}
-                <NavbarHeader/>
-            </Container>
+            {/*<Container fluid>*/}
+            {/*    /!* Header *!/*/}
+            {/*    <NavbarHeader/>*/}
+            {/*</Container>*/}
 
             <Container fluid className="row me-0 pe-0 ms-0 ps-0 overflow-hidden mt-5">
                 <Container className="col-md-6 col-sm-12 text-center">

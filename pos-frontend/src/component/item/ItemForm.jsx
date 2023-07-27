@@ -55,7 +55,7 @@ const ItemForm = () => {
     return (
         <>
             {/* Header */}
-            <NavbarHeader/>
+            {/*<NavbarHeader/>*/}
 
             {/* Item form */}
             <main id="item_main_container"
