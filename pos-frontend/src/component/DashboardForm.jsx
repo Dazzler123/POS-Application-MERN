@@ -32,10 +32,10 @@ export const DashboardForm = () => {
         navigate('/manage-order');
     }
 
-
     const styles = {
-        backgroundColor: '#e3f2fd',
+        // backgroundColor: '#e3f2fd',
         // fontSize: '48px'
+        height:"75vh"
     };
 
     const btnDashboard = {
@@ -76,7 +76,9 @@ export const DashboardForm = () => {
                     />
                 </Container>
 
-                <Row className="col-md-6 col-sm-12 row gap-4 mt-5 justify-content-center text-center">
+                <Row className="col-md-6 col-sm-12 row gap-4 mt-5 justify-content-center text-center
+                pb-0 mb-0"
+                style={styles}>
                     <Col id="btn_Customer" className="col-4 shadow bg-body rounded-5 "
                          style={{...btnGroupStyle, ...(isHovered && btnGroupHoverStyle)}}
                          onClick={btnCustomerOnClick}>
@@ -105,9 +107,9 @@ export const DashboardForm = () => {
                         <h3 className="display-6 fs-3 mt-3">Manage Orders</h3>
                     </Col>
                 </Row>
-                <small className="col-12 fw-light fs-6 text-end mt-0 pe-4">
-                    Designed & Developed By Dasindu Hewagamage
-                </small>
+                {/*<small className="col-12 fw-light fs-6 text-end pe-4 m-0">*/}
+                {/*    Designed & Developed By Dasindu Hewagamage*/}
+                {/*</small>*/}
             </Container>
         </>
     )
